@@ -32,12 +32,13 @@ class AuthTokenSerializer(serializers.Serializer):
 
         user = authenticate(
             request=self.context.get("request"),
-            email=email,
+            username=email,  # ← usa username=email
             password=password,
         )
+
         if not user:
             raise serializers.ValidationError(
-                "Unable to authenticate with provided credentials",
+                "Unable to log in with provided credentials",
                 code="authorization",
             )
 
